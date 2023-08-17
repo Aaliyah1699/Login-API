@@ -57,3 +57,14 @@ btnDOM.addEventListener("click", async () => {
     resultDOM.innerHTML = `<p>${error.response.data.msg}</p>`;
   }
 });
+
+const checkToken = () => {
+  tokenDOM.classList.remove("text-success");
+
+  const token = localStorage.getItem("token");
+  if (token) {
+    tokenDOM.textContent = "token present";
+    tokenDOM.classList.add("text-success");
+  }
+};
+checkToken();
