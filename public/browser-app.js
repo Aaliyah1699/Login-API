@@ -40,3 +40,20 @@ formDOM.addEventListener("submit", async (e) => {
     formAlertDOM.style.display = "none";
   }, 2000);
 });
+
+btnDOM.addEventListener("click", async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const { data } = await axios.get("/api/v1/dashboard", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    resultDOM.innerHTML = `<h5>${data.msg}</h5><p>${data.secret}</p>`;
+
+    data.secret;
+  } catch (error) {
+    localStorage.removeItem("token");
+    resultDOM.innerHTML = `<p>${error.response.data.msg}</p>`;
+  }
+});
